@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreUpdateBlockRequest;
 use App\Models\Building;
 use App\Models\Block;
 use Illuminate\Http\Request;
@@ -35,7 +37,7 @@ class BlockController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUpdateBlockRequest $request)
     {
         $validated = $request->validate([
             'block_name' => 'required|string|max:255',
@@ -68,7 +70,7 @@ class BlockController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreUpdateBlockRequest $request, string $id)
     {
         $updated = $this->block->where('id', $id)->update($request->except(['_token', '_method']));
 

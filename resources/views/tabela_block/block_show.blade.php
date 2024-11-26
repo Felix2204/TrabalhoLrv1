@@ -1,5 +1,13 @@
 <x-app-layout>
 
+<div class="flex justify-start mb-6">
+            <a type="button" href="{{ route('blocks.index') }}" 
+               class=" py-6 px-4 text-blue-500 hover:text-blue-700 font-medium transition duration-200">
+                Voltar ao Inicio <
+            </a>
+        </div>
+
+
     <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-sm">
         <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">Tem certeza que deseja excluir este Bloco?</p>
 
@@ -16,4 +24,5 @@
         </form>
     </div>
     </div>
+    <script src="https://cdn.tailwindcss.com"></script>
 </x-app-layout>

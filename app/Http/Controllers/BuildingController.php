@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateBuildingRequest;
 use App\Models\Building;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 
 class BuildingController extends Controller
@@ -33,7 +35,7 @@ class BuildingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUpdateBuildingRequest $request)
     {
         $created = $this->building->create([
             'nome_predio' => $request->input('nome_predio'),
@@ -67,7 +69,7 @@ class BuildingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreUpdateBuildingRequest $request, string $id)
     {
         $updated = $this->building->where('id', $id)->update($request->except(['_token', '_method']));
 

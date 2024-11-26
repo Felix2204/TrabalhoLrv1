@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\StoreUpdateResidentRequest;
 use App\Models\Resident;
 use Illuminate\Http\Request;
 
@@ -31,27 +31,26 @@ class ResidentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        
-       $created = $this->resident->create([
-        'nome' => $request -> input('nome'),
-        'bloco' => $request -> input('bloco'),
-        'predio' => $request -> input('predio'),
-        'apartamento' => $request -> input('apartamento'),
-       ]);
+    public function store(StoreUpdateResidentRequest $request)
+{
+    
+    $request->validate([
+        'nome' => 'required|string|max:255',
+        'bloco' => 'required|string|max:255',
+        'predio' => 'required|string|max:255',
+        'apartamento' => 'required|integer',
+    ]);
 
-       if($created){
-        if ($created) {
-            return redirect()->route('dashboard')->with('message', 'Criado com Sucesso!');
-        }
+    Resident::create([
+        'nome' => $request->nome,
+        'bloco' => $request->bloco,
+        'predio' => $request->predio,
+        'apartamento' => $request->apartamento,
+    ]);
 
 
-       }
-
-       return redirect() -> back() -> with('message', 'error');
-
-    }
+    return redirect()->route('dashboard')->with('message', 'Residente cadastrado com sucesso!');
+}
 
     /**
      * Display the specified resource.
@@ -72,7 +71,7 @@ class ResidentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreUpdateResidentRequest $request, string $id)
     {
         $updated = $this->resident->where('id', $id)->update($request->except(['_token','_method']));
 

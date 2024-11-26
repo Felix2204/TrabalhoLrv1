@@ -1,14 +1,14 @@
-<div class="py-12 px-4 sm:px-6 "> 
+<div class="py-12 px-4 sm:px-6 ">
     <x-nav-link :href="route('residents.index')" :active="request()->routeIs('residents.index')">
         {{ __('Residentes') }}
     </x-nav-link>
 
     <div class="flex justify-end mt-4">
-    <a href="{{ route('residents.create') }}" 
-        class="bg-black hover:bg-black text-indigo-600 font-semibold py-2 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-300">
-        Criar 
-    </a>
-</div>
+        <a href="{{ route('residents.create') }}"
+            class="bg-indigo-600  hover:bg-indigo-600  text-white font-semibold py-2 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-black transition duration-300">
+            Criar
+        </a>
+    </div>
 
 
     <div class="space-y-6 mt-6">
@@ -20,11 +20,11 @@
                     </h3>
                     <div class="flex space-x-3">
                         <a href="{{ route('residents.edit', ['resident' => $resident->id]) }}"
-                           class="inline-flex items-center px-3 py-2 text-indigo-600 dark:text-indigo-500 rounded-lg hover:text-blue-800 dark:text-blue-500 dark:bg-blue-900 dark:hover:bg-blue-800 font-medium transition duration-200 ease-in-out">
+                            class="inline-flex items-center px-3 py-2 text-indigo-600 dark:text-indigo-500 rounded-lg hover:text-blue-800 dark:text-blue-500 dark:bg-blue-900 dark:hover:bg-blue-800 font-medium transition duration-200 ease-in-out">
                             Editar
                         </a>
                         <a href="{{ route('residents.destroy', ['resident' => $resident->id]) }}"
-                           class="inline-flex items-center px-3 py-2 text-red-600 dark:text-red-500 rounded-lg hover:text-red-800 dark:text-red-500 dark:bg-red-900 dark:hover:bg-red-800 font-medium transition duration-200 ease-in-out">
+                            class="inline-flex items-center px-3 py-2 text-red-600 dark:text-red-500 rounded-lg hover:text-red-800 dark:text-red-500 dark:bg-red-900 dark:hover:bg-red-800 font-medium transition duration-200 ease-in-out">
                             Deletar
                         </a>
                     </div>
@@ -38,4 +38,6 @@
             </div>
         @endforeach
     </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </div>

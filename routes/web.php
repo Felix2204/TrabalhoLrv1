@@ -7,7 +7,23 @@ use App\Http\Controllers\BlockController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/residents', [ResidentController::class, 'index'])->name('residents.index');
+
+
+
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+Route::get('/auth.login', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/residents', [ResidentController::class, 'index'])->name('residents.index');
 Route::get('/residents/create', [ResidentController::class, 'create'])->name('residents.create');
 Route::post('/residents', [ResidentController::class, 'store'])->name('residents.store');
 Route::get('/residents/{resident}', [ResidentController::class, 'show'])->name('residents.show');
@@ -32,20 +48,6 @@ Route::get('/buildings/{building}/edit', [BuildingController::class, 'edit'])->n
 Route::put('/buildings/{building}', [BuildingController::class, 'update'])->name('buildings.update');
 Route::delete('/buildings/{building}', [BuildingController::class, 'destroy'])->name('buildings.destroy');
 
-
-
-Route::get('/', function () {
-    return view('auth.login');
-});
-
-Route::get('/auth.login', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
